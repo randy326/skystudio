@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>漂漂空拍 — 案件進度</title>
+<title>自然光影像 × 漣澐空拍 — 案件進度</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200;300;400;500&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -31,7 +31,7 @@
   --deadline:#D4826A;
 }
 
-html{font-size:15px}
+html{font-size:17px}
 body{
   background:var(--bg);
   color:var(--text-primary);
@@ -269,7 +269,7 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 
   <header class="masthead">
     <div>
-      <div class="brand">自然光影像 × 漂漂空拍</div>
+      <div class="brand">自然光影像 × 漣澐空拍</div>
       <div class="title-zh"><strong>案件</strong>進度</div>
       <div class="title-en">Project Progress — Aerial Photography</div>
     </div>
@@ -306,7 +306,7 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
   <div id="detail-panel" style="display:none"></div>
 
   <footer class="site-footer">
-    <div class="footer-l">2025 空拍作業追蹤</div>
+    <div class="footer-l">2026 空拍作業追蹤</div>
     <div class="footer-r" id="footer-hint">點選專案列查看詳情</div>
   </footer>
 
@@ -347,14 +347,14 @@ const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done"};
 // deadline: 申請生效期限，填 null 代表尚未確認
 // col: 0–4=5月W1–W5 | 5–9=6月W1–W5 | 10–14=7月W1–W5
 const projects=[
-  {name:"立信 新外灘",   en:"Lixin Xinwaitan",     deadline:"2025.05.07", deadlineNote:"已生效",      bars:[{col:0,span:1,type:"done"}]},
-  {name:"大陸建設 衡玥", en:"Continental Hengyue", deadline:"2025.05.07", deadlineNote:"已生效",      bars:[{col:0,span:1,type:"done"}]},
-  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2025.05.28", deadlineNote:"效期至此日",  bars:[{col:0,span:4,type:"waiting"}]},
-  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2025.05.28", deadlineNote:"效期至此日",  bars:[{col:0,span:4,type:"applying"}]},
-  {name:"掬月 白",       en:"Juyue Bai",            deadline:null,         deadlineNote:"待確認",      bars:[{col:2,span:3,type:"applying"}]},
-  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2025.05.28", deadlineNote:"效期至此日",  bars:[{col:0,span:4,type:"applying"}]},
-  {name:"萬華 信義",     en:"Wanhua Xinyi",         deadline:null,         deadlineNote:"待確認",      bars:[{col:0,span:4,type:"applying"}]},
-  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2025.06.07", deadlineNote:"效期至此日",  bars:[{col:1,span:4,type:"applying"}]},
+  {name:"立信 新外灘",   en:"Lixin Xinwaitan",     deadline:"已失效",      deadlineNote:"申請已逾期",  bars:[{col:0,span:1,type:"done"}]},
+  {name:"大陸建設 衡玥", en:"Continental Hengyue", deadline:"2026.05.28",  deadlineNote:"效期至此日",  bars:[{col:0,span:1,type:"done"}]},
+  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2026.04.12 — 2026.06.11", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"waiting"}]},
+  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
+  {name:"掬月 白",       en:"Juyue Bai",            deadline:null,          deadlineNote:"待確認",      bars:[{col:2,span:3,type:"applying"}]},
+  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
+  {name:"萬華 信義",     en:"Wanhua Xinyi",         deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
+  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.06.07",  deadlineNote:"效期至此日",  bars:[{col:2,span:4,type:"applying"}]},
 ];
 
 const notes={};
@@ -406,7 +406,7 @@ function buildBody(){
       }
     });
     // deadline column
-    const dlDisplay = p.deadline ? p.deadline.slice(5) : '—';
+    const dlDisplay = p.deadline ? (p.deadline.startsWith('2026.') ? p.deadline.slice(5) : p.deadline) : '—';
     html+=`<td class="deadline-td"><span>${dlDisplay}</span></td>`;
     html+=`<td class="note-td" id="np-${pi}">—</td></tr>`;
   });
