@@ -28,6 +28,9 @@
   --done:#7AAF8A;
   --done-bg:rgba(122,175,138,0.14);
   --done-text:#B4D4BE;
+  --shooting:#9B8EC4;
+  --shooting-bg:rgba(155,142,196,0.14);
+  --shooting-text:#CCC0E8;
   --deadline:#D4826A;
 }
 
@@ -172,6 +175,7 @@ td.deadline-td span{
 .bar-applying{background:var(--applying-bg);color:var(--applying-text);border-left:2px solid var(--applying)}
 .bar-waiting {background:var(--waiting-bg); color:var(--waiting-text); border-left:2px solid var(--waiting)}
 .bar-done    {background:var(--done-bg);    color:var(--done-text);    border-left:2px solid var(--done)}
+.bar-shooting{background:var(--shooting-bg);color:var(--shooting-text);border-left:2px solid var(--shooting)}
 
 /* detail panel */
 #detail-panel{
@@ -206,6 +210,7 @@ td.deadline-td span{
 .pip-applying{background:var(--applying)}
 .pip-waiting {background:var(--waiting)}
 .pip-done    {background:var(--done)}
+.pip-shooting{background:var(--shooting)}
 .status-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-secondary);letter-spacing:0.06em}
 .status-range{color:var(--text-muted);margin-left:8px;font-style:italic}
 
@@ -289,6 +294,7 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 
   <div class="legend">
     <div class="leg"><div class="leg-line" style="background:var(--applying)"></div>申請中</div>
+    <div class="leg"><div class="leg-line" style="background:var(--shooting)"></div>拍攝中</div>
     <div class="leg"><div class="leg-line" style="background:var(--waiting)"></div>申請完成，等待拍攝</div>
     <div class="leg"><div class="leg-line" style="background:var(--done)"></div>已拍攝完成</div>
   </div>
@@ -340,21 +346,21 @@ function isTodayWeek(wk){
   return(todayM===sm&&todayD>=sd)||(todayM===em&&todayD<=ed);
 }
 
-const SL={applying:"申請中",waiting:"等待拍攝",done:"已完成"};
-const PIP={applying:"pip-applying",waiting:"pip-waiting",done:"pip-done"};
-const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done"};
+const SL={applying:"申請中",waiting:"等待拍攝",done:"已完成",shooting:"拍攝中"};
+const PIP={applying:"pip-applying",waiting:"pip-waiting",done:"pip-done",shooting:"pip-shooting"};
+const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done",shooting:"bar-shooting"};
 
 // deadline: 申請生效期限，填 null 代表尚未確認
 // col: 0–4=5月W1–W5 | 5–9=6月W1–W5 | 10–14=7月W1–W5
 const projects=[
   {name:"立信 新外灘",   en:"Lixin Xinwaitan",     deadline:"已失效",      deadlineNote:"申請已逾期",  bars:[{col:0,span:1,type:"done"}]},
   {name:"大陸建設 衡玥", en:"Continental Hengyue", deadline:"2026.04.09 — 2026.05.28", deadlineNote:"效期區間",   bars:[{col:0,span:1,type:"done"}]},
-  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2026.04.12 — 2026.06.11", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"waiting"}], note:"已拍攝碧湖畔、勤美璞真，勤美合和需等管委會公告一週後拍攝（5/23）"},
+  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2026.04.12 — 2026.06.11", deadlineNote:"效期區間",   bars:[{col:0,span:5,type:"waiting"}], note:"已拍攝碧湖畔、勤美璞真，勤美合和需等管委會公告一週後拍攝（5/23）"},
   {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
-  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:2,span:4,type:"applying"}]},
-  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
-  {name:"萬華 信義",     en:"Wanhua Xinyi",         deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
-  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:2,span:4,type:"applying"}]},
+  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
+  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
+  {name:"萬華 信義",     en:"Wanhua Xinyi",         deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
+  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
 ];
 
 const notes={};
