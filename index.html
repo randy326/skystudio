@@ -354,8 +354,8 @@ const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done",shootin
 // col: 0–4=5月W1–W5 | 5–9=6月W1–W5 | 10–14=7月W1–W5
 const projects=[
   {name:"立信 新外灘",   en:"Lixin Xinwaitan",     deadline:"已失效",      deadlineNote:"申請已逾期",  bars:[{col:0,span:1,type:"done"}]},
-  {name:"大陸建設 衡玥", en:"Continental Hengyue", deadline:"2026.04.09 — 2026.05.28", deadlineNote:"效期區間",   bars:[{col:0,span:1,type:"done"}]},
-  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2026.04.12 — 2026.06.11", deadlineNote:"效期區間",   bars:[{col:0,span:5,type:"done"}], note:"待確認內容"},
+  {name:"大陸建設 衡玥", en:"Continental Hengyue", deadline:"2026.04.09 — 2026.05.28", deadlineNote:"已過期",   bars:[{col:0,span:1,type:"done"}]},
+  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2026.04.12 — 2026.06.11", deadlineNote:"已過期",   bars:[{col:0,span:5,type:"done"}], note:"待確認內容"},
   {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:5,span:8,type:"shooting"}], note:"雲霧較厚，日間大景可能需要補拍"},
   {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
   {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:4,span:9,type:"shooting"}], note:"已拍攝完成，待確認需修正內容"},
@@ -375,7 +375,7 @@ function buildHead(){
     const sep=mi>0?' m-sep':'';
     mh+=`<th colspan="${m.weeks.length}" class="${sep}" style="padding:0 0 10px 4px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#B0A898;border-bottom:1px solid rgba(255,255,255,0.18);text-align:left;font-weight:300">${m.label}</th>`;
   });
-  mh+=`<th style="min-width:72px;padding:0 0 10px 6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#C87A62;border-bottom:1px solid rgba(255,255,255,0.18);text-align:center;font-weight:300">期限</th>`;
+  mh+=`<th style="min-width:72px;padding:0 0 10px 6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#C87A62;border-bottom:1px solid rgba(255,255,255,0.18);text-align:center;font-weight:300">申請期間</th>`;
   mh+=`<th class="note-th" style="min-width:90px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.18)"></th>`;
   mr.innerHTML=mh;
 
@@ -446,7 +446,7 @@ function renderPanel(idx){
 
   const dlBlock = `
     <div class="deadline-block">
-      <div class="dl-label">申請生效期限</div>
+      <div class="dl-label">申請期間</div>
       <div class="dl-date">${p.deadline || '尚未確認'}</div>
       <div class="dl-note">${p.deadlineNote || ''}</div>
     </div>`;
