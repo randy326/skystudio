@@ -319,17 +319,13 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 </div>
 <script>
 const months=[
-  {label:"May 五月",key:5,weeks:[
-    {w:"W1",s:"05/01",e:"05/07"},{w:"W2",s:"05/08",e:"05/14"},{w:"W3",s:"05/15",e:"05/21"},
-    {w:"W4",s:"05/22",e:"05/28"},{w:"W5",s:"05/29",e:"05/31"}
-  ]},
-  {label:"June 六月",key:6,weeks:[
-    {w:"W1",s:"06/01",e:"06/07"},{w:"W2",s:"06/08",e:"06/14"},{w:"W3",s:"06/15",e:"06/21"},
-    {w:"W4",s:"06/22",e:"06/28"},{w:"W5",s:"06/29",e:"06/30"}
-  ]},
   {label:"July 七月",key:7,weeks:[
     {w:"W1",s:"07/01",e:"07/07"},{w:"W2",s:"07/08",e:"07/14"},{w:"W3",s:"07/15",e:"07/21"},
     {w:"W4",s:"07/22",e:"07/28"},{w:"W5",s:"07/29",e:"07/31"}
+  ]},
+  {label:"August 八月",key:8,weeks:[
+    {w:"W1",s:"08/01",e:"08/07"},{w:"W2",s:"08/08",e:"08/14"},{w:"W3",s:"08/15",e:"08/21"},
+    {w:"W4",s:"08/22",e:"08/28"}
   ]}
 ];
 
@@ -351,16 +347,15 @@ const PIP={applying:"pip-applying",waiting:"pip-waiting",done:"pip-done",shootin
 const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done",shooting:"bar-shooting"};
 
 // deadline: 申請生效期限，填 null 代表尚未確認
-// col: 0–4=5月W1–W5 | 5–9=6月W1–W5 | 10–14=7月W1–W5
+// col: 0–4=7月W1–W5 | 5–8=8月W1–W4
 const projects=[
-  {name:"立信 新外灘",   en:"Lixin Xinwaitan",     deadline:"已失效",      deadlineNote:"申請已逾期",  bars:[{col:0,span:1,type:"done"}]},
-  {name:"大陸建設 衡玥", en:"Continental Hengyue", deadline:"2026.04.09 — 2026.05.28", deadlineNote:"已過期",   bars:[{col:0,span:1,type:"done"}]},
-  {name:"璞真 業績",     en:"Puzhen Yeji",          deadline:"2026.04.12 — 2026.06.11", deadlineNote:"已過期",   bars:[{col:0,span:5,type:"done"}], note:"待確認內容"},
-  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:5,span:8,type:"shooting"}], note:"雲霧較厚，日間大景可能需要補拍"},
-  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
-  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:4,span:9,type:"shooting"}], note:"已拍攝完成，待確認需修正內容"},
-  {name:"萬華 新碩",     en:"Wanhua Xinsuo",         deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:4,span:9,type:"shooting"}], note:"已拍攝部分內容"},
-  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:9,type:"shooting"}], note:"待劇組拍攝日補拍其餘畫面"},
+  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"雲霧較厚，日間大景可能需要補拍"},
+  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"waiting"}]},
+  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"已拍攝完成，待確認需修正內容"},
+  {name:"萬華 新碩",     en:"Wanhua Xinsuo",        deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"已拍攝部分內容"},
+  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"待劇組拍攝日補拍其餘畫面"},
+  {name:"遠雄 新未來",   en:"Farglory New Future",  deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
+  {name:"文心 南京案",   en:"Wenxin Nanjing",       deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
 ];
 
 const notes={};
