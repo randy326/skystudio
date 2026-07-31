@@ -349,13 +349,14 @@ const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done",shootin
 // deadline: 申請生效期限，填 null 代表尚未確認
 // col: 0–4=7月W1–W5 | 5–8=8月W1–W4
 const projects=[
-  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"雲霧較厚，日間大景可能需要補拍"},
-  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"waiting"}]},
-  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"已拍攝完成，待確認需修正內容"},
-  {name:"萬華 新碩",     en:"Wanhua Xinsuo",        deadline:"2026.05.17 — 2026.07.16", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"已拍攝部分內容"},
-  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"shooting"}], note:"待劇組拍攝日補拍其餘畫面"},
-  {name:"遠雄 新未來",   en:"Farglory New Future",  deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
-  {name:"文心 南京案",   en:"Wenxin Nanjing",       deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:4,type:"applying"}]},
+  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:9,type:"shooting"}], note:"雲霧較厚，日間大景可能需要補拍"},
+  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
+  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:9,type:"shooting"}], note:"已拍攝完成，待確認需修正內容"},
+  {name:"萬華 新碩",     en:"Wanhua Xinsuo",        deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:9,type:"shooting"}], note:"已拍攝部分內容"},
+  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"done"}], note:"待劇組拍攝日補拍其餘畫面"},
+  {name:"遠雄 新未來",   en:"Farglory New Future",  deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
+  {name:"文心 南京案",   en:"Wenxin Nanjing",       deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
+  {name:"震大 懷喆",     en:"Zhenda Huaizhe",       deadline:"2026.07.30 — 2026.09.29", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"waiting"}]},
 ];
 
 const notes={};
