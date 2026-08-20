@@ -294,8 +294,8 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 
   <div class="legend">
     <div class="leg"><div class="leg-line" style="background:var(--applying)"></div>申請中</div>
-    <div class="leg"><div class="leg-line" style="background:var(--shooting)"></div>拍攝中</div>
     <div class="leg"><div class="leg-line" style="background:var(--waiting)"></div>申請完成，等待拍攝</div>
+    <div class="leg"><div class="leg-line" style="background:var(--shooting)"></div>拍攝中</div>
     <div class="leg"><div class="leg-line" style="background:var(--done)"></div>已拍攝完成</div>
   </div>
 
@@ -319,13 +319,13 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 </div>
 <script>
 const months=[
-  {label:"July 七月",key:7,weeks:[
-    {w:"W1",s:"07/01",e:"07/07"},{w:"W2",s:"07/08",e:"07/14"},{w:"W3",s:"07/15",e:"07/21"},
-    {w:"W4",s:"07/22",e:"07/28"},{w:"W5",s:"07/29",e:"07/31"}
-  ]},
   {label:"August 八月",key:8,weeks:[
     {w:"W1",s:"08/01",e:"08/07"},{w:"W2",s:"08/08",e:"08/14"},{w:"W3",s:"08/15",e:"08/21"},
     {w:"W4",s:"08/22",e:"08/28"}
+  ]},
+  {label:"September 九月",key:9,weeks:[
+    {w:"W1",s:"09/01",e:"09/07"},{w:"W2",s:"09/08",e:"09/14"},{w:"W3",s:"09/15",e:"09/21"},
+    {w:"W4",s:"09/22",e:"09/28"}
   ]}
 ];
 
@@ -347,16 +347,18 @@ const PIP={applying:"pip-applying",waiting:"pip-waiting",done:"pip-done",shootin
 const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done",shooting:"bar-shooting"};
 
 // deadline: 申請生效期限，填 null 代表尚未確認
-// col: 0–4=7月W1–W5 | 5–8=8月W1–W4
+// col: 0–3=8月W1–W4 | 4–7=9月W1–W4
 const projects=[
-  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:9,type:"shooting"}], note:"雲霧較厚，日間大景可能需要補拍"},
-  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"shooting"}]},
-  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:9,type:"shooting"}], note:"已拍攝完成，待確認需修正內容"},
-  {name:"萬華 新碩",     en:"Wanhua Xinsuo",        deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:9,type:"shooting"}], note:"已拍攝部分內容"},
-  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"done"}], note:"待劇組拍攝日補拍其餘畫面"},
-  {name:"遠雄 新未來",   en:"Farglory New Future",  deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"done"}]},
-  {name:"文心 南京案",   en:"Wenxin Nanjing",       deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"done"}]},
-  {name:"震大 懷喆",     en:"Zhenda Huaizhe",       deadline:"2026.07.30 — 2026.09.29", deadlineNote:"效期區間",   bars:[{col:4,span:5,type:"shooting"}]},
+  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"雲霧較厚，日間大景可能需要補拍"},
+  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
+  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"已拍攝完成，待確認需修正內容"},
+  {name:"萬華 新碩",     en:"Wanhua Xinsuo",        deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"已拍攝部分內容"},
+  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"待劇組拍攝日補拍其餘畫面"},
+  {name:"遠雄 新未來",   en:"Farglory New Future",  deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
+  {name:"文心 南京案",   en:"Wenxin Nanjing",       deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
+  {name:"震大 懷喆",     en:"Zhenda Huaizhe",       deadline:"2026.07.30 — 2026.09.29", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
+  {name:"台中 織森",     en:"Taichung Zhisen",      deadline:null,                       deadlineNote:"待確認",     bars:[{col:2,span:4,type:"waiting"}]},
+  {name:"仁愛路 建案",   en:"Renai Road Project",   deadline:null,                       deadlineNote:"待確認",     bars:[{col:2,span:4,type:"waiting"}]},
 ];
 
 const notes={};
