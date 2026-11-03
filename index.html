@@ -111,7 +111,7 @@ body{
 
 /* table */
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:760px}
+table{width:100%;border-collapse:collapse;min-width:760px;table-layout:fixed}
 
 thead tr.month-row th{
   padding:0 0 10px 4px;text-align:left;
@@ -301,6 +301,7 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 
   <div class="table-wrap">
     <table>
+      <colgroup id="cols"></colgroup>
       <thead>
         <tr class="month-row" id="month-row"></tr>
         <tr class="week-row"  id="week-row"></tr>
@@ -319,13 +320,9 @@ textarea.note-input:focus{border-bottom-color:var(--gold)}
 </div>
 <script>
 const months=[
-  {label:"August 八月",key:8,weeks:[
-    {w:"W1",s:"08/01",e:"08/07"},{w:"W2",s:"08/08",e:"08/14"},{w:"W3",s:"08/15",e:"08/21"},
-    {w:"W4",s:"08/22",e:"08/28"}
-  ]},
-  {label:"September 九月",key:9,weeks:[
-    {w:"W1",s:"09/01",e:"09/07"},{w:"W2",s:"09/08",e:"09/14"},{w:"W3",s:"09/15",e:"09/21"},
-    {w:"W4",s:"09/22",e:"09/28"}
+  {label:"November 十一月",key:11,weeks:[
+    {w:"W1",s:"11/01",e:"11/07"},{w:"W2",s:"11/08",e:"11/14"},{w:"W3",s:"11/15",e:"11/21"},
+    {w:"W4",s:"11/22",e:"11/28"}
   ]}
 ];
 
@@ -347,24 +344,22 @@ const PIP={applying:"pip-applying",waiting:"pip-waiting",done:"pip-done",shootin
 const BAR={applying:"bar-applying",waiting:"bar-waiting",done:"bar-done",shooting:"bar-shooting"};
 
 // deadline: 申請生效期限，填 null 代表尚未確認
-// col: 0–3=8月W1–W4 | 4–7=9月W1–W4
+// col: 0–3=11月W1–W4
 const projects=[
-  {name:"永雄 卓閱",     en:"Yongxiong Zhuoyue",   deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"雲霧較厚，日間大景可能需要補拍"},
-  {name:"掬月 白",       en:"Juyue Bai",            deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
-  {name:"萬華 鄉林",     en:"Wanhua Xianglin",      deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"已拍攝完成，待確認需修正內容"},
-  {name:"萬華 新碩",     en:"Wanhua Xinsuo",        deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"已拍攝部分內容"},
-  {name:"桓鉅 南西案",   en:"Huanju Nanxi",         deadline:"2026.05.28 — 2026.07.27", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}], note:"待劇組拍攝日補拍其餘畫面"},
-  {name:"遠雄 新未來",   en:"Farglory New Future",  deadline:"2026.07.19 — 2026.09.18", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
-  {name:"文心 南京案",   en:"Wenxin Nanjing",       deadline:"2026.07.18 — 2026.09.17", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
-  {name:"震大 懷喆",     en:"Zhenda Huaizhe",       deadline:"2026.07.30 — 2026.09.29", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"done"}]},
-  {name:"台中 織森",     en:"Taichung Zhisen",      deadline:null,                       deadlineNote:"待確認",     bars:[{col:2,span:4,type:"waiting"}]},
-  {name:"仁愛路 建案",   en:"Renai Road Project",   deadline:null,                       deadlineNote:"待確認",     bars:[{col:2,span:4,type:"waiting"}]},
+  {name:"南港 友座",     en:"Nangang Youzuo",       deadline:"2026.09.12 — 2026.11.11", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"shooting"}]},
+  {name:"南山 A21",      en:"Nanshan A21",          deadline:"2026.09.12 — 2026.11.11", deadlineNote:"效期區間",   bars:[{col:0,span:2,type:"shooting"}]},
+  {name:"漢皇 昂揚",     en:"Hanhuang Angyang",     deadline:"2026.11.12 — 2027.01.11", deadlineNote:"效期區間",   bars:[{col:0,span:3,type:"applying"}]},
+  {name:"昌邑 邀悅",     en:"Changyi Yaoyue",       deadline:"2026.10.10 — 2026.12.09", deadlineNote:"效期區間",   bars:[{col:0,span:1,type:"done"}]},
 ];
 
 const notes={};
 let activeIdx=null;
 
 function buildHead(){
+  let cg=`<col style="width:150px">`;
+  allWeeks.forEach(()=>{cg+=`<col>`;});
+  cg+=`<col style="width:150px"><col style="width:120px">`;
+  document.getElementById("cols").innerHTML=cg;
   const mr=document.getElementById("month-row");
   const wr=document.getElementById("week-row");
 
@@ -410,7 +405,7 @@ function buildBody(){
       }
     });
     // deadline column
-    const dlDisplay = p.deadline ? (p.deadline.startsWith('2026.') ? p.deadline.slice(5) : p.deadline) : '—';
+    const dlDisplay = p.deadline ? p.deadline.replace(/2026\./g,'') : '—';
     html+=`<td class="deadline-td"><span>${dlDisplay}</span></td>`;
     html+=`<td class="note-td" id="np-${pi}">—</td></tr>`;
   });
